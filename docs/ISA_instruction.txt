@@ -22,10 +22,11 @@ BACKGROUND - SCROLL (Opcode: 0001)
 Define o deslocamento da câmera sobre o background.
 Tamanho: 1 Word (32 bits)
 
-[31:28] : Opcode (0001) - 4 bits
-[27:22] : Scroll X      - 6 bits (Deslocamento horizontal)
-[21:17] : Scroll Y      - 5 bits (Deslocamento vertical)
-[16:00] : Reservado     - 17 bits (Preenchimento com zeros)
+[31:28] :	Opcode 0001
+[27:26]	: Direção — 2 bits
+[25:22]	: Quantidade — 4 bits, de 1 a 15 tiles
+[21:0]	: Reservados — zero
+//alteração separando os bits de direção dos bits de deslocamento
 
 SPRITE - POSICIONAR SPRITE (Opcode: 0010)
 
