@@ -55,7 +55,7 @@ Tamanho: 1 Word (32 bits)
 [05:05] : Visível - 1 bit (1 = Ativo, 0 = Oculto)
 [04:04] : Espelhamento Vertical - 1 bit
 [03:03] : Espelhamento Horizontal - 1 bit
-[02:02] : Transparente - 1 bit
+[02:02] : Transparente - 1 bit (1 = indice RGB332 00 deixa a camada inferior aparecer)
 [01:00] : Reservado - 2 bits
 
 POLÍGONO - DRAW RETÂNGULO/QUADRADO (Opcode: 0011)
@@ -113,11 +113,10 @@ parcial é descartado.
 
 SINCRONIZADOR DE QUADROS - VSYNC (Opcode: 0101)
 
-Reservado para implementação futura.
-
-A ideia é que essa instrução pause a execução da FIFO até o período de VBlank,
-evitando alterações visuais no meio de um quadro e possíveis efeitos de
-screen tearing.
+Implementado como barreira de quadro: a unidade de controle mantem BUSY ativo
+e nao conclui a palavra ate receber o pulso de inicio do VBlank do controlador
+VGA. A FIFO nao entrega a proxima palavra enquanto esta instrucao espera.
+Isso permite ao programa agrupar alteracoes visuais depois de um VBlank.
 
 Tamanho: 1 Word (32 bits)
 
